@@ -26,3 +26,11 @@ classificador.compile(optimizer = 'adam', loss = 'binary_crossentropy',
                       metrics = ['binary_accuracy'])
 classificador.fit(previsores_treinamento, classe_treinamento,
                   batch_size = 10, epochs = 100)
+
+previsoes = classificador.predict(previsores_teste)
+previsoes = (previsoes > 0.5)
+from sklearn.metrics import confusion_matrix, accuracy_score
+precisao = accuracy_score(classe_teste, previsoes)
+matriz = confusion_matrix(classe_teste, previsoes)
+
+resultado = classificador.evaluate(previsores_teste, classe_teste)
